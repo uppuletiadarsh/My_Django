@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Success</title>
+    <style>
+        body {
+            text-align: center; 
+        }
+
+        h1 {
+            margin-bottom: 20px; 
+        }
+
+        form {
+            margin-bottom: 20px; 
+        }
+
+        table {
+            margin: 0 auto; 
+            border-collapse: collapse; 
+            width: 50%; 
+        }
+
+        th, td {
+            border: 2px solid black; 
+            padding: 8px; 
+            text-align: left; 
+        }
+
+        th {
+            background-color: #f2f2f2; /* Background color for header cells */
+        }
+
+        input[type="submit"] {
+            padding: 10px 20px; /* Space inside the button */
+            font-size: 16px; /* Increase font size */
+            cursor: pointer; /* Pointer cursor on hover */
+        }
+    </style>
+</head>
+<body>
+    <h1>Registration Success</h1>
+    <form action="{% url 'det' %}" method="post">
+        {% csrf_token %}
+        <input type="submit" value="Click Here For All Details">
+    </form>
+    <div>
+        <form>{% csrf_token %}
+        <table border="2px">
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Salary</th>
+            </tr>
+            {% for i in det %}
+            <tr>
+                <td>{{ i.eid }}</td>
+                <td>{{ i.ename }}</td>
+                <td>{{ i.salary }}</td>
+            </tr>
+        
+            {% endfor %}
+        </table></form>
+    </div>
+</body>
+</html>

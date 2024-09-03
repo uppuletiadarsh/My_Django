@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Check Below For Student Details</title>
+    <style>
+        body {
+            text-align: center;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+            color: blue;
+        }
+
+        form {
+            margin-bottom: 20px;
+        }
+
+        table {
+            margin: 0 auto;
+            border-collapse: collapse;
+            width: 80%;
+        }
+
+        th, td {
+            border: 2px solid black;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #24ebca; /* Background color for header cells */
+        }
+    </style>
+</head>
+<body>
+    <h1>Students Details</h1>
+    <div>
+        <form>{% csrf_token %}
+        <table border="2px">
+            <tr>
+                <th>Name</th>
+                <th>Roll No</th>
+                <th>Physics</th>
+                <th>Chemistry</th>
+                <th>English</th>
+                <th>Total Marks</th>
+                <th>Physics Status</th>
+                <th>Chemistry Status</th>
+                <th>English Status</th>
+                <th>Result</th>
+            </tr>
+            {% for i in det %}
+            <tr>
+                <td>{{ i.name }}</td>
+                <td>{{ i.roll_no }}</td>
+                <td>{{ i.physics }}</td>
+                <td>{{ i.chemistry }}</td>
+                <td>{{ i.english }}</td>
+                <td>{{ i.total_marks }}</td>
+                <td>{% if i.physics >= 35 %}Pass{% else %}Fail{% endif %}</td>
+                <td>{% if i.chemistry >= 35 %}Pass{% else %}Fail{% endif %}</td>
+                <td>{% if i.english >= 35 %}Pass{% else %}Fail{% endif %}</td>
+                <td>
+                    {% if i.physics >= 35 and i.chemistry >= 35 and i.english >= 35 %}
+                        Pass
+                    {% else %}
+                        Fail
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </table></form>
+    </div>
+</body>
+</html>

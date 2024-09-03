@@ -1,0 +1,28 @@
+<form method="Post"  action="{% url 'save' %}">{% csrf_token %}
+    <table>
+        <tr>
+            <td>Name</td>
+            <td><input type="text" name="Name"></td>
+        </tr>
+        <tr>
+            <td>Roll No</td>
+            <td><input type="text" name="rno"></td>
+        </tr>
+        <tr>
+            <td>Physics</td>
+            <td><input type="number" name="ph"></td>
+        </tr>
+        <tr>
+            <td>Chemistry</td>
+            <td><input type="number" name="ch"></td>
+        </tr>
+        <tr>
+            <td>English</td>
+            <td><input type="number" name="eng"></td>
+        </tr>
+        <tr>
+            
+            <td colspan="2"><input type="submit"></td>
+        </tr>
+    </table></form>
+    <h1>{{ m }}</h1>
