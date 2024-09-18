@@ -1,0 +1,71 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do List</title>
+    <link rel="stylesheet" href="{% static 'css/home.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h1 class="header-background">TO-DO-LIST</h1>
+
+        <!-- Add Task Form -->
+       
+        <form method="POST" class="add-task-form">
+            {% csrf_token %}
+            <input type="hidden" name="action" value="create">
+            <label for="task" style="display:none;">Task:</label>
+            <input type="text" id="task" name="task" required>
+            <input type="submit" value="Add Task">
+        </form>
+        
+
+        <!-- Task Management Table -->
+        <h1 id="a">Manage Tasks</h1>
+        <style>
+            #a{
+                text-align: left;
+            }
+
+        </style>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Task</th>
+                    <th>Update</th>
+                    <th>Delete</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for task in tasks %}
+                <tr>
+                    <td>{{ task.id }}</td>
+                    <td>{{ task.task }}</td>
+                    <td>
+                        <form method="POST" style="display:inline;">
+                            {% csrf_token %}
+                            <input type="hidden" name="action" value="update">
+                            <input type="hidden" name="task_id" value="{{ task.id }}">
+                            <label for="task-update-{{ task.id }}" style="display:none;">New Task:</label>
+                            <input type="text" id="task-update-{{ task.id }}" name="task" value="{{ task.task }}" required>
+                            <input type="submit" class="update-button" value="Update">
+                        </form>
+                    </td>
+                    <td>
+                        <form method="POST" style="display:inline;">
+                            {% csrf_token %}
+                            <input type="hidden" name="action" value="delete">
+                            <input type="hidden" name="task_id" value="{{ task.id }}">
+                            <input type="submit" class="delete-button" value="Delete">
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

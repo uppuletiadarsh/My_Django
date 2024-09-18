@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ action }} Product</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        h1 {
+            background-color: #333;
+            color: white;
+            padding: 10px;
+            text-align: center;
+            margin: 0;
+        }
+
+        .container {
+            width: 80%;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: white;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .info-box {
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 10px;
+            margin: 10px 0;
+            text-align: left;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .info-box p {
+            margin: 0;
+            padding: 5px 0;
+            font-size: 14px;
+            color: #333;
+        }
+
+        .info-box p strong {
+            font-weight: bold;
+            color: #007bff;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            margin: 10px 0;
+        }
+
+        .product-buttons {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .product-buttons button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .btn-update {
+            background-color: #007bff;
+            color: white;
+        }
+
+        .btn-update:hover {
+            background-color: #0056b3;
+        }
+
+        .btn-delete {
+            background-color: #dc3545;
+            color: white;
+        }
+
+        .btn-delete:hover {
+            background-color: #c82333;
+        }
+
+        a {
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <h1>{{ action }} Product</h1>
+    <div class="container">
+        {% if product.image %}
+            <img src="{{ product.image.url }}" alt="{{ product.name }}">
+        {% endif %}
+        <div class="info-box">
+            <p><strong>Name:</strong> {{ product.name|default_if_none:'N/A' }}</p>
+        </div>
+        <div class="info-box">
+            <p><strong>Description:</strong> {{ product.description|default_if_none:'N/A' }}</p>
+        </div>
+        <div class="info-box">
+            <p><strong>Price:</strong> ₹{{ product.price|default_if_none:'0.00' }}</p>
+        </div>
+        <div class="info-box">
+            <p><strong>Stock:</strong> {{ product.stock|default_if_none:'0' }}</p>
+        </div>
+        <div class="product-buttons">
+            <a href="{% url 'product_update' product.pk %}">
+                <button class="btn-update">Update</button>
+            </a>
+            <a href="{% url 'product_delete' product.pk %}">
+                <button class="btn-delete">Delete</button>
+            </a>
+        </div>
+    </div>
+</body>
+</html>
+

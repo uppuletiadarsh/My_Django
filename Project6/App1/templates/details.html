@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Details</title>
+    <style>
+        body {
+            text-align: center;
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5; /* Light gray background color for the page */
+        }
+
+        h1 {
+            margin-bottom: 20px;
+            color: blue; /* Heading color */
+        }
+
+        table {
+            margin: 0 auto;
+            border-collapse: collapse;
+            width: 80%;
+            background-color: white; /* Plain white background for the table */
+            border: 1px solid black; /* Thin border */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Shadow effect */
+        }
+
+        th, td {
+            border: 1px solid black; /* Thin border */
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f0f8ff; /* AliceBlue for table header */
+        }
+
+        td {
+            background-color: #ffeef0; /* Very light pink color for table content */
+        }
+
+        thead th {
+            background-color: #d3d3d3; /* Light gray for the table header background */
+        }
+
+        /* Style for Update button */
+        .update-button {
+            background-color: green;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        /* Style for Delete button */
+        .delete-button {
+            background-color: red;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        /* Style for buttons on hover */
+        .update-button:hover, .delete-button:hover {
+            opacity: 0.8;
+        }
+    </style>
+</head>
+<body>
+    <h1>Employee Details</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Emp Id</th>
+                <th>Emp Name</th>
+                <th>Emp Salary</th>
+                <th>Emp Domain</th>
+                <th>Emp Role</th>
+                <th>Update</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for i in det %}
+            <tr>
+                <td>{{ i.empid }}</td>
+                <td>{{ i.name }}</td>
+                <td>{{ i.salary }}</td>
+                <td>{{ i.domain }}</td>
+                <td>{{ i.role }}</td>
+                <td>
+                    <form action="{% url 'update' i.empid %}" method="post">
+                        {% csrf_token %}
+                        <button type="submit" class="update-button">Update</button>
+                    </form>
+                </td>
+                <td>
+                    <form action="{% url 'delete' i.empid %}" method="post">
+                        {% csrf_token %}
+                        <button type="submit" class="delete-button">Delete</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
+ 

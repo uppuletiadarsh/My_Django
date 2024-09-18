@@ -1,0 +1,164 @@
+/* Ensure the body has no margin and full height */
+body {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    width: 100%;
+    font-family: Arial, sans-serif;
+    background-color: #eaeaea; /* Soft gray background for the body */
+}
+
+/* Container for the whole content */
+.container {
+    width: 100%;
+    max-width: 1600px; /* Increased max-width for more space */
+    margin: 0 auto;
+    padding: 40px; /* Padding for space around the content */
+    background: #ffffff; /* White background for the container */
+    border-radius: 8px;
+    box-sizing: border-box;
+}
+
+/* Heading styles */
+h1, h2 {
+    color: #4a4a4a; /* Dark gray text for headings */
+    text-align: center;
+}
+
+/* Specific style for the h1 with background color */
+.header-background {
+    background-color: #4caf50; /* Green background color for the h1 */
+    color: #ffffff; /* White text color */
+    padding: 20px; /* Padding for space inside the background */
+    border-radius: 8px; /* Rounded corners for the background */
+    margin: 0; /* Remove default margin */
+}
+
+/* Form styling */
+form {
+    margin: 30px 0; /* Increased margin to give more space between elements */
+}
+
+/* Add Task Form */
+.add-task-form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px; /* Increased gap for better spacing */
+}
+
+.add-task-form input[type="text"] {
+    padding: 12px; /* Increased padding */
+    font-size: 18px; /* Larger font size for better readability */
+    border: 1px solid #dcdcdc; /* Light gray border for input fields */
+    border-radius: 4px;
+    width: 350px; /* Increased width */
+    box-sizing: border-box;
+}
+
+.add-task-form input[type="submit"] {
+    padding: 12px 25px; /* Increased padding */
+    font-size: 18px; /* Larger font size */
+    border: none;
+    border-radius: 4px;
+    background-color: #4caf50; /* Green background for the submit button */
+    color: #ffffff;
+    cursor: pointer;
+}
+
+.add-task-form input[type="submit"]:hover {
+    background-color: #388e3c; /* Darker green on hover */
+}
+
+/* To-Do List Section */
+.todo-list-section {
+    background-color: #ffffff; /* White background for the To-Do List section */
+    padding: 20px;
+    border-radius: 8px; /* Rounded corners for a smooth look */
+    margin-top: 20px; /* Space above the To-Do List section */
+}
+
+/* To-Do List Heading */
+.todo-list-heading {
+    background-color: #4caf50; /* Green background for the heading */
+    color: #ffffff; /* White text for contrast */
+    padding: 15px;
+    border-radius: 8px; /* Rounded corners for the heading background */
+    text-align: center;
+    margin: -20px -20px 20px -20px; /* Ensure background extends to container edges */
+}
+
+/* Table styling */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 30px; /* Increased margin for spacing */
+}
+
+table th, table td {
+    padding: 15px; /* Increased padding */
+    text-align: left;
+    border-bottom: 1px solid #dcdcdc; /* Light gray border for table rows */
+}
+
+table th {
+    background-color: #4caf50; /* Green background for table headers */
+    color: #ffffff; /* White text for table headers */
+}
+
+table tr:nth-child(even) {
+    background-color: #ffffff; /* White background for even rows */
+}
+
+table tr:nth-child(odd) {
+    background-color: #f9f9f9; /* Slightly off-white background for odd rows */
+}
+
+table tr:hover {
+    background-color: #f1f1f1; /* Light gray on hover */
+}
+
+/* Button styling for table actions */
+table input[type="submit"].update-button {
+    padding: 7px 15px; /* Increased padding */
+    font-size: 16px; /* Larger font size */
+    border: none;
+    border-radius: 4px;
+    background-color: #007bff; /* Blue background for update button */
+    color: white;
+    cursor: pointer;
+}
+
+table input[type="submit"].update-button:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+}
+
+table input[type="submit"].delete-button {
+    padding: 7px 15px; /* Increased padding */
+    font-size: 16px; /* Larger font size */
+    border: none;
+    border-radius: 4px;
+    background-color: #dc3545; /* Red background for delete button */
+    color: white;
+    cursor: pointer;
+}
+
+table input[type="submit"].delete-button:hover {
+    background-color: #c82333; /* Darker red on hover */
+}
+
+/* Responsive design for smaller screens */
+@media (max-width: 600px) {
+    .add-task-form {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .add-task-form input[type="text"] {
+        width: 100%;
+    }
+
+    .add-task-form input[type="submit"] {
+        width: 100%;
+    }
+}

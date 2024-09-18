@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Product List</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #7b9169; /* Alice Blue background */
+        }
+        h1 {
+            background-color: #333;
+            color: white;
+            padding: 10px;
+            text-align: center;
+        }
+        .container {
+            width: 80%;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: white;
+            box-shadow: 0 10 10px rgba(99, 133, 45, 0.1);
+        }
+        .search-form {
+            margin-bottom: 20px;
+        }
+        .search-form input[type="text"] {
+            padding: 10px;
+            width: calc(50% - 130px);
+            margin-right: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .search-form button {
+            padding: 10px 20px;
+            background-color: #03220b;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .search-form button:hover {
+            background-color: #10cc4e;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: #f4f4f4;
+        }
+        .product-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px; /* Space between products */
+            margin-bottom: 20px;
+        }
+        .product-item {
+            width: 23%; /* Adjust width as needed */
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 10px;
+            box-shadow: 0 0 5px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        .product-item img {
+            max-width: 100px;
+            max-height: 100px;
+            object-fit: cover;
+            display: block;
+            margin: 0 auto 10px; /* Center and add space below image */
+        }
+        .product-buttons {
+            display: flex;
+            gap: 10px; /* Space between buttons */
+            justify-content: center; /* Center buttons */
+        }
+        .product-buttons button {
+            padding: 5px 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .btn-add {
+            padding: 10px 20px;
+            background-color: #042408;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            text-align: center;
+            display: inline-block;
+            text-decoration: none;
+        }
+        .btn-add:hover {
+            background-color: #032410;
+        }
+    </style>
+</head>
+<body>
+    <h1>Product Management System</h1>
+    <div class="container">
+        <form method="get" action="" class="search-form">
+            <input type="text" name="name" placeholder="Search by name" value="{{ request.GET.name }}">
+            <input type="text" name="product_id" placeholder="Search by product ID" value="{{ request.GET.product_id }}">
+            <button type="submit">Search</button>
+        </form>
+        <div class="product-container">
+            {% for product in products %}
+                <div class="product-item">
+                    {% if product.image %}
+                        <img src="{{ product.image.url }}" alt="{{ product.name }}">
+                    {% endif %}
+                    <div class="product-buttons">
+                        <a href="{% url 'product_detail' product.pk %}">
+                            <button class="btn-view">View Product</button>
+                        </a>
+                        <a href="{% url 'product_update' product.pk %}">
+                            <button class="btn-edit">Update Product</button>
+                        </a>
+                        <a href="{% url 'product_delete' product.pk %}">
+                            <button class="btn-delete">Delete Product</button>
+                        </a>
+                    </div>
+                    <h3>{{ product.name }}</h3>
+                    <p>₹{{ product.price }}</p>
+                    
+                </div>
+            {% empty %}
+                <div>No products found.</div>
+            {% endfor %}
+        </div>
+        <a href="{% url 'product_create' %}" class="btn-add">Add New Product</a>
+    </div>
+</body>
+</html>

@@ -1,0 +1,81 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Management</title>
+    <link rel="stylesheet" href="{% static 'css/home.css' %}">
+</head>
+<body>
+    <h1>Employee Management System</h1>
+
+    <div class="container">
+        <div class="form-container">
+            <h2>Employee Form</h2>
+            <form action="" method="post" class="form">
+                {% csrf_token %}
+                <input type="hidden" name="action" value="create">
+                
+                <label for="empid">Employee ID:</label>
+                <input type="text" id="empid" name="Empid" required>
+
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="Name" required>
+
+                <label for="domain">Domain:</label>
+                <input type="text" id="domain" name="Domain" required>
+
+                <input type="submit" value="Add Employee">
+            </form>
+        </div>
+
+        <div class="table-container">
+            <h2>Manage Data</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Emp Id</th>
+                        <th>Emp Name</th>
+                        <th>Domain</th>
+                        <th>Update</th>
+                        <th>Delete</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for employee in data %}
+                    <tr>
+                        <td>{{ employee.Empid }}</td>
+                        <td>{{ employee.Name }}</td>
+                        <td>{{ employee.Domain }}</td>
+                        <td>
+                            <form method="post">
+                                {% csrf_token %}
+                                <input type="hidden" name="action" value="update">
+                                <input type="hidden" name="Empid" value="{{ employee.Empid }}">
+                                
+                                <label for="name-{{ employee.Empid }}">New Name:</label>
+                                <input type="text" id="name-{{ employee.Empid }}" name="Name" value="{{ employee.Name }}" required>
+
+                                <label for="domain-{{ employee.Empid }}">New Domain:</label>
+                                <input type="text" id="domain-{{ employee.Empid }}" name="Domain" value="{{ employee.Domain }}" required>
+
+                                <button type="submit" class="update-button">Update</button>
+                            </form>
+                        </td>
+                        <td>
+                            <form action="" method="post">
+                                {% csrf_token %}
+                                <input type="hidden" name="action" value="delete">
+                                <input type="hidden" name="Empid" value="{{ employee.Empid }}">
+                                <button type="submit" class="delete-button">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>
